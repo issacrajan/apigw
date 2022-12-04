@@ -14,7 +14,7 @@ import com.issac.apigw.entity.ClientIdpInfo;
 public class ClientIdpInfoDTO {
 
 	private String clientId;
-	private String idpUrl;
+	private String idpBaseUrl;
 	private String domainName;
 	private String loginMethod;
 	private String redirectUri;
@@ -28,12 +28,12 @@ public class ClientIdpInfoDTO {
 		this.clientId = clientId;
 	}
 
-	public String getIdpUrl() {
-		return idpUrl;
+	public String getIdpBaseUrl() {
+		return idpBaseUrl;
 	}
 
-	public void setIdpUrl(String idpUrl) {
-		this.idpUrl = idpUrl;
+	public void setIdpBaseUrl(String idpBaseUrl) {
+		this.idpBaseUrl = idpBaseUrl;
 	}
 
 	public String getDomainName() {
@@ -72,7 +72,7 @@ public class ClientIdpInfoDTO {
 		ClientIdpInfoDTO dto = new ClientIdpInfoDTO();
 		dto.setClientId(entity.getClientId());
 		dto.setDomainName(entity.getDomainName());
-		dto.setIdpUrl(entity.getIdpUrl());
+		dto.setIdpBaseUrl(entity.getIdpBaseUrl());
 		dto.setLoginMethod(entity.getLoginMethod());
 		dto.setRedirectUri(entity.getRedirectUri());
 		dto.setIdpProvider(entity.getIdpProvider());
@@ -99,8 +99,9 @@ public class ClientIdpInfoDTO {
 
 	@Override
 	public String toString() {
-		return "ClientIdpInfo [clientId=" + clientId + ", idpUrl=" + idpUrl + ", domainName=" + domainName
-				+ ", loginMethod=" + loginMethod + "]";
+		return "ClientIdpInfoDTO [clientId=" + clientId + ", idpBaseUrl=" + idpBaseUrl + ", domainName="
+				+ domainName + ", loginMethod=" + loginMethod + ", redirectUri=" + redirectUri
+				+ ", idpProvider=" + idpProvider + "]";
 	}
 
 }

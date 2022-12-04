@@ -5,15 +5,29 @@ package com.issac.apigw.controller;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.Base64;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.issac.apigw.constant.Constants;
 import com.issac.apigw.dto.ClientIdpInfoDTO;
+import com.issac.apigw.dto.UserLoginStateDTO;
 import com.issac.apigw.service.ClientIdpInfoService;
+import com.issac.apigw.service.EndpointFactory;
+import com.issac.apigw.service.RegisteredClientService;
+import com.issac.apigw.service.UserLoginStateService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -29,10 +43,17 @@ public class AuthController {
 	@Value("${idp.client.finder:DomainName}")
 	private String clientIdFinder;
 
+	private EndpointFactory endpointFactory;
 	private ClientIdpInfoService clientIdpInfoService;
+	private UserLoginStateService loginStateService;
+	private RegisteredClientService clientService;
 
-	public AuthController(ClientIdpInfoService clientIdpInfoService) {
+	public AuthController(ClientIdpInfoService clientIdpInfoService, UserLoginStateService loginStateService,
+			EndpointFactory endpointFactory, RegisteredClientService clientService) {
 		this.clientIdpInfoService = clientIdpInfoService;
+		this.loginStateService = loginStateService;
+		this.endpointFactory = endpointFactory;
+		this.clientService = clientService;
 	}
 
 	@GetMapping("/auth/login")
@@ -55,10 +76,16 @@ public class AuthController {
 		} else {
 			String loginMethod = idpInfo.getLoginMethod();
 			if (Constants.LOGIN_METHOD_OPENID.endsWith(loginMethod)) {
-				StringBuilder url = new StringBuilder(idpInfo.getIdpUrl());
+				String state = UUID.randomUUID().toString();
+				String idpProvider = idpInfo.getIdpProvider();
+				String authEndpoint = endpointFactory.getEndpoint(idpProvider).getAuthorizationEndpoint();
+				StringBuilder url = new StringBuilder(authEndpoint);
 				url.append("?").append("response_type=code");
 				url.append("&client_id=").append(idpInfo.getClientId());
 				url.append("&redirect_uri=").append(URLEncoder.encode(idpInfo.getRedirectUri(), "UTF-8"));
+				url.append("&state=").append(state);
+
+				loginStateService.save(idpInfo.getClientId(), state);
 				response.sendRedirect(url.toString());
 			} else {
 				// not implemented
@@ -70,7 +97,29 @@ public class AuthController {
 	// http://127.0.0.1:9000/auth/callback?code=oNQnHKXs8rZwpKDLrX72G0B5JsQWBnDPl-HYQkkCn07rEZiibTtkytq4lQiUo8hvHgxiS5OBxfgsAvpZd0eIfQc5C336QECQLbfiyYN_DHM0Lv8sn9Bt0OIdbsYJAyGK
 	@GetMapping("/auth/callback")
 	public void oauth2Callback(@RequestParam(name = "code") String code,
-			@RequestParam(name = "state", required = false) String state) {
+			@RequestParam(name = "state", required = false) String state) throws Exception {
 
+		UserLoginStateDTO stateDTO = loginStateService.findByState(state);
+		loginStateService.deleteUsedState(state);
+		ClientIdpInfoDTO idpInfo = clientIdpInfoService.findClientInfoUsingClientId(stateDTO.getClientId());
+		String idpProvider = idpInfo.getIdpProvider();
+		String tokenEndpoint = endpointFactory.getEndpoint(idpProvider).getTokenEndpoint();
+		System.out.println(code);
+		String clientSecret = clientService.findByClientId(stateDTO.getClientId()).getClientSecret();
+		Base64.getEncoder().encodeToString("".getBytes());
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+		headers.setBasicAuth(stateDTO.getClientId(), clientSecret);
+
+		MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+		map.add("grant_type", "authorization_code");
+		map.add("code", code);
+		map.add("redirect_uri", URLEncoder.encode(idpInfo.getRedirectUri(), "UTF-8"));
+
+		RestTemplate restTemplate = new RestTemplate();
+		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(map, headers);
+		ResponseEntity<String> exchange = restTemplate.exchange(tokenEndpoint, HttpMethod.POST, entity,
+				String.class);
+		System.out.println(exchange.getBody());
 	}
 }

@@ -6,6 +6,7 @@ package com.issac.apigw.entity;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 /**
@@ -16,8 +17,9 @@ import jakarta.persistence.Table;
 @Table(name = "client_idp_info")
 public class ClientIdpInfo {
 
+	@Id
 	private String clientId;
-	private String idpUrl;
+	private String idpBaseUrl;
 	private String domainName;
 	private String loginMethod;
 	private String redirectUri;
@@ -31,12 +33,12 @@ public class ClientIdpInfo {
 		this.clientId = clientId;
 	}
 
-	public String getIdpUrl() {
-		return idpUrl;
+	public String getIdpBaseUrl() {
+		return idpBaseUrl;
 	}
 
-	public void setIdpUrl(String idpUrl) {
-		this.idpUrl = idpUrl;
+	public void setIdpBaseUrl(String idpBaseUrl) {
+		this.idpBaseUrl = idpBaseUrl;
 	}
 
 	public String getDomainName() {
@@ -90,9 +92,9 @@ public class ClientIdpInfo {
 
 	@Override
 	public String toString() {
-		return "ClientIdpInfo [clientId=" + clientId + ", idpUrl=" + idpUrl + ", domainName=" + domainName
-				+ ", loginMethod=" + loginMethod + ", redirectUri=" + redirectUri + ", idpProvider="
-				+ idpProvider + "]";
+		return "ClientIdpInfo [clientId=" + clientId + ", idpBaseUrl=" + idpBaseUrl + ", domainName="
+				+ domainName + ", loginMethod=" + loginMethod + ", redirectUri=" + redirectUri
+				+ ", idpProvider=" + idpProvider + "]";
 	}
 
 }

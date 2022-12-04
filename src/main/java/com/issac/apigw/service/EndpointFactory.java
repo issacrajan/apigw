@@ -42,7 +42,7 @@ public class EndpointFactory {
 
 		for (ClientIdpInfo idp : clientInfoList) {
 			provider = idp.getIdpProvider();
-			providerBaseUrl = idp.getIdpUrl();
+			providerBaseUrl = idp.getIdpBaseUrl();
 
 			if (Constants.IDP_PROVIDER_SPRING.equals(provider)) {
 				EndpointDTO dto = new EndpointDTO();
@@ -51,6 +51,7 @@ public class EndpointFactory {
 				dto.setJwkSetEndpoint(providerBaseUrl + "/oauth2/jwks");
 
 				endpointMap.put(provider, dto);
+				System.out.println(dto);
 			} else {
 				throw new RuntimeException(
 						"not yet implemented for provider " + provider + "; URL: " + providerBaseUrl);
