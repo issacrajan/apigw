@@ -1,4 +1,4 @@
-package com.issac.apigw.apigw;
+package com.issac.apigw;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
