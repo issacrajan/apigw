@@ -14,11 +14,13 @@ import com.issac.apigw.entity.ClientIdpInfo;
 public class ClientIdpInfoDTO {
 
 	private String clientId;
+	private String clientSecret;
 	private String idpBaseUrl;
 	private String domainName;
 	private String loginMethod;
 	private String redirectUri;
 	private String idpProvider;
+	private String wellKnownEndpointsUrl;
 
 	public String getClientId() {
 		return clientId;
@@ -26,6 +28,14 @@ public class ClientIdpInfoDTO {
 
 	public void setClientId(String clientId) {
 		this.clientId = clientId;
+	}
+
+	public String getClientSecret() {
+		return clientSecret;
+	}
+
+	public void setClientSecret(String clientSecret) {
+		this.clientSecret = clientSecret;
 	}
 
 	public String getIdpBaseUrl() {
@@ -68,14 +78,24 @@ public class ClientIdpInfoDTO {
 		this.idpProvider = idpProvider;
 	}
 
+	public String getWellKnownEndpointsUrl() {
+		return wellKnownEndpointsUrl;
+	}
+
+	public void setWellKnownEndpointsUrl(String wellKnownEndpointsUrl) {
+		this.wellKnownEndpointsUrl = wellKnownEndpointsUrl;
+	}
+
 	public static ClientIdpInfoDTO convertEntity(ClientIdpInfo entity) {
 		ClientIdpInfoDTO dto = new ClientIdpInfoDTO();
 		dto.setClientId(entity.getClientId());
+		dto.setClientSecret(entity.getClientSecret());
 		dto.setDomainName(entity.getDomainName());
 		dto.setIdpBaseUrl(entity.getIdpBaseUrl());
 		dto.setLoginMethod(entity.getLoginMethod());
 		dto.setRedirectUri(entity.getRedirectUri());
 		dto.setIdpProvider(entity.getIdpProvider());
+		dto.setWellKnownEndpointsUrl(entity.getWellKnownEndpointUrl());
 
 		return dto;
 	}
@@ -99,9 +119,10 @@ public class ClientIdpInfoDTO {
 
 	@Override
 	public String toString() {
-		return "ClientIdpInfoDTO [clientId=" + clientId + ", idpBaseUrl=" + idpBaseUrl + ", domainName="
-				+ domainName + ", loginMethod=" + loginMethod + ", redirectUri=" + redirectUri
-				+ ", idpProvider=" + idpProvider + "]";
+		return "ClientIdpInfoDTO [clientId=" + clientId + ", clientSecret=" + clientSecret + ", idpBaseUrl="
+				+ idpBaseUrl + ", domainName=" + domainName + ", loginMethod=" + loginMethod
+				+ ", redirectUri=" + redirectUri + ", idpProvider=" + idpProvider + ", wellKnownEndpointsUrl="
+				+ wellKnownEndpointsUrl + "]";
 	}
 
 }

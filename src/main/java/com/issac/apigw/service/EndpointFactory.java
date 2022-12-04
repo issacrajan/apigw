@@ -52,6 +52,14 @@ public class EndpointFactory {
 
 				endpointMap.put(provider, dto);
 				System.out.println(dto);
+			} else if (Constants.IDP_PROVIDER_OKTA_OPENID.equals(provider)) {
+				EndpointDTO dto = new EndpointDTO();
+				dto.setAuthorizationEndpoint(providerBaseUrl + "/oauth2/default/v1/authorize");
+				dto.setTokenEndpoint(providerBaseUrl + "/oauth2/default/v1/token");
+				dto.setJwkSetEndpoint(providerBaseUrl + "/oauth2/default/v1/keys");
+
+				endpointMap.put(provider, dto);
+				System.out.println(dto);
 			} else {
 				throw new RuntimeException(
 						"not yet implemented for provider " + provider + "; URL: " + providerBaseUrl);

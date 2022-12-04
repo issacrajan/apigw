@@ -15,6 +15,6 @@ public class Constants {
 	public static final String LOGIN_METHOD_OPENID = "openid";
 
 	public static final String IDP_PROVIDER_SPRING = "spring";
-	public static final String IDP_PROVIDER_OKTA_OPENID = "spring-openid";
-	public static final String IDP_PROVIDER_OKTA_SAML = "spring-saml";
+	public static final String IDP_PROVIDER_OKTA_OPENID = "okta";
+	public static final String IDP_PROVIDER_OKTA_SAML = "okta-saml";
 }

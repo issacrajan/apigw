@@ -19,11 +19,14 @@ public class ClientIdpInfo {
 
 	@Id
 	private String clientId;
+
+	private String clientSecret;
 	private String idpBaseUrl;
 	private String domainName;
 	private String loginMethod;
 	private String redirectUri;
 	private String idpProvider;
+	private String wellKnownEndpointUrl;
 
 	public String getClientId() {
 		return clientId;
@@ -31,6 +34,14 @@ public class ClientIdpInfo {
 
 	public void setClientId(String clientId) {
 		this.clientId = clientId;
+	}
+
+	public String getClientSecret() {
+		return clientSecret;
+	}
+
+	public void setClientSecret(String clientSecret) {
+		this.clientSecret = clientSecret;
 	}
 
 	public String getIdpBaseUrl() {
@@ -73,6 +84,14 @@ public class ClientIdpInfo {
 		this.idpProvider = idpProvider;
 	}
 
+	public String getWellKnownEndpointUrl() {
+		return wellKnownEndpointUrl;
+	}
+
+	public void setWellKnownEndpointUrl(String wellKnownEndpointUrl) {
+		this.wellKnownEndpointUrl = wellKnownEndpointUrl;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(clientId);
@@ -92,9 +111,10 @@ public class ClientIdpInfo {
 
 	@Override
 	public String toString() {
-		return "ClientIdpInfo [clientId=" + clientId + ", idpBaseUrl=" + idpBaseUrl + ", domainName="
-				+ domainName + ", loginMethod=" + loginMethod + ", redirectUri=" + redirectUri
-				+ ", idpProvider=" + idpProvider + "]";
+		return "ClientIdpInfo [clientId=" + clientId + ", clientSecret=" + clientSecret + ", idpBaseUrl="
+				+ idpBaseUrl + ", domainName=" + domainName + ", loginMethod=" + loginMethod
+				+ ", redirectUri=" + redirectUri + ", idpProvider=" + idpProvider + ", wellKnownEndpointUrl="
+				+ wellKnownEndpointUrl + "]";
 	}
 
 }
