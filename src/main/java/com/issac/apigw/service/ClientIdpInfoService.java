@@ -4,6 +4,7 @@
 package com.issac.apigw.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import com.issac.apigw.dto.ClientIdpInfoDTO;
 import com.issac.apigw.entity.ClientIdpInfo;
@@ -22,7 +23,14 @@ public class ClientIdpInfoService {
 	}
 
 	public ClientIdpInfoDTO getClientIdpInfo(String domainName) {
+		Assert.hasText(domainName, "domainName cannot be empty");
 		ClientIdpInfo clientIdpInfo = clientIdpInfoRepo.findByDomainName(domainName);
+		return ClientIdpInfoDTO.convertEntity(clientIdpInfo);
+	}
+
+	public ClientIdpInfoDTO findClientInfoUsingClientId(String clientId) {
+		Assert.hasText(clientId, "client id cannot be empty");
+		ClientIdpInfo clientIdpInfo = clientIdpInfoRepo.getReferenceById(clientId);
 		return ClientIdpInfoDTO.convertEntity(clientIdpInfo);
 	}
 }

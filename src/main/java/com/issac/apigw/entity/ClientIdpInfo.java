@@ -20,6 +20,8 @@ public class ClientIdpInfo {
 	private String idpUrl;
 	private String domainName;
 	private String loginMethod;
+	private String redirectUri;
+	private String idpProvider;
 
 	public String getClientId() {
 		return clientId;
@@ -53,6 +55,22 @@ public class ClientIdpInfo {
 		this.loginMethod = loginMethod;
 	}
 
+	public String getRedirectUri() {
+		return redirectUri;
+	}
+
+	public void setRedirectUri(String redirectUri) {
+		this.redirectUri = redirectUri;
+	}
+
+	public String getIdpProvider() {
+		return idpProvider;
+	}
+
+	public void setIdpProvider(String idpProvider) {
+		this.idpProvider = idpProvider;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(clientId);
@@ -73,7 +91,8 @@ public class ClientIdpInfo {
 	@Override
 	public String toString() {
 		return "ClientIdpInfo [clientId=" + clientId + ", idpUrl=" + idpUrl + ", domainName=" + domainName
-				+ ", loginMethod=" + loginMethod + "]";
+				+ ", loginMethod=" + loginMethod + ", redirectUri=" + redirectUri + ", idpProvider="
+				+ idpProvider + "]";
 	}
 
 }

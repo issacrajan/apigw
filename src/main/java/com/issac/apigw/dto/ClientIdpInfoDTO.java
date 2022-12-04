@@ -17,6 +17,8 @@ public class ClientIdpInfoDTO {
 	private String idpUrl;
 	private String domainName;
 	private String loginMethod;
+	private String redirectUri;
+	private String idpProvider;
 
 	public String getClientId() {
 		return clientId;
@@ -50,12 +52,30 @@ public class ClientIdpInfoDTO {
 		this.loginMethod = loginMethod;
 	}
 
+	public String getRedirectUri() {
+		return redirectUri;
+	}
+
+	public void setRedirectUri(String redirectUri) {
+		this.redirectUri = redirectUri;
+	}
+
+	public String getIdpProvider() {
+		return idpProvider;
+	}
+
+	public void setIdpProvider(String idpProvider) {
+		this.idpProvider = idpProvider;
+	}
+
 	public static ClientIdpInfoDTO convertEntity(ClientIdpInfo entity) {
 		ClientIdpInfoDTO dto = new ClientIdpInfoDTO();
 		dto.setClientId(entity.getClientId());
 		dto.setDomainName(entity.getDomainName());
 		dto.setIdpUrl(entity.getIdpUrl());
 		dto.setLoginMethod(entity.getLoginMethod());
+		dto.setRedirectUri(entity.getRedirectUri());
+		dto.setIdpProvider(entity.getIdpProvider());
 
 		return dto;
 	}
