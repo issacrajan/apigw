@@ -5,6 +5,7 @@ package com.issac.apigw.controller;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.Enumeration;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.issac.apigw.TestDTO;
 import com.issac.apigw.constant.Constants;
 import com.issac.apigw.dto.ClientIdpInfoDTO;
 import com.issac.apigw.dto.JwtDTO;
@@ -55,6 +57,37 @@ public class AuthController {
 		this.loginStateService = loginStateService;
 		this.endpointFactory = endpointFactory;
 		mapper = new ObjectMapper();
+	}
+
+	@GetMapping(path = "/api/test", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<TestDTO> test(HttpServletRequest req) {
+		TestDTO t = new TestDTO();
+		Enumeration<String> headerNames = req.getHeaderNames();
+		while (headerNames.hasMoreElements()) {
+			String name = headerNames.nextElement();
+			System.out.println(name + " : " + req.getHeader(name));
+		}
+		System.out.println("ContentType " + req.getContentType());
+		System.out.println("ContextPath " + req.getContextPath());
+		System.out.println("Local Addr " + req.getLocalAddr());
+		System.out.println("Local Name " + req.getLocalName());
+		System.out.println("ContentType " + req.getLocalPort());
+		System.out.println("Path Info " + req.getPathInfo());
+		System.out.println("Path Translated " + req.getPathTranslated());
+		System.out.println("Protocol " + req.getProtocol());
+		System.out.println("Protocol ReqID: " + req.getProtocolRequestId());
+		System.out.println("Remote Addr: " + req.getRemoteAddr());
+		System.out.println("Remote Port " + req.getRemotePort());
+		System.out.println("Remote User " + req.getRemoteUser());
+		System.out.println("Request Session ID " + req.getRequestedSessionId());
+		System.out.println("Request ID " + req.getRequestId());
+		System.out.println("Request UIR " + req.getRequestURI());
+		System.out.println("Scheme " + req.getScheme());
+		System.out.println("ServerName " + req.getServerName());
+		System.out.println("ServerPort " + req.getServerPort());
+		System.out.println("ServletPath " + req.getServletPath());
+
+		return ResponseEntity.ok(t);
 	}
 
 	@GetMapping("/auth/login")
