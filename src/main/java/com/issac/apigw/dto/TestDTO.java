@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2022 issac.rajan@gmail.com. All rights reserved.
  */
-package com.issac.apigw;
+package com.issac.apigw.dto;
 
 /**
  * @author issac
