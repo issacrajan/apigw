@@ -1,0 +1,41 @@
+2022-12-18 06:54:50,432 INFO o.s.o.j.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-12-18 06:54:50,516 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2022-12-18 06:54:50,565 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2022-12-18 06:55:16,602 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 8.0.0.Final
+2022-12-18 06:55:16,815 INFO o.s.b.StartupInfoLogger [main] Starting ApigwApplication using Java 17.0.3.1 with PID 418557 (/home/issac/work/ws-spring/apigw/bin/main started by issac in /home/issac/work/ws-spring/apigw)
+2022-12-18 06:55:16,824 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2022-12-18 06:55:18,541 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-12-18 06:55:18,618 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 65 ms. Found 2 JPA repository interfaces.
+2022-12-18 06:55:19,635 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port(s): 9090 (http)
+2022-12-18 06:55:19,664 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-9090"]
+2022-12-18 06:55:19,666 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
+2022-12-18 06:55:19,666 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/10.1.1]
+2022-12-18 06:55:19,814 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2022-12-18 06:55:19,821 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 2803 ms
+2022-12-18 06:55:20,092 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2022-12-18 06:55:20,558 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5d318e91
+2022-12-18 06:55:20,562 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2022-12-18 06:55:20,695 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-12-18 06:55:20,821 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.1.5.Final
+2022-12-18 06:55:21,144 WARN o.h.b.i.MetadataBuilderImpl$MetadataBuildingOptionsImpl [main] HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2022-12-18 06:55:21,314 INFO o.h.e.j.d.i.DialectFactoryImpl [main] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL92Dialect
+2022-12-18 06:55:21,315 WARN o.h.e.j.d.i.DialectFactoryImpl [main] HHH90000026: PostgreSQL92Dialect has been deprecated; use org.hibernate.dialect.PostgreSQLDialect instead
+2022-12-18 06:55:22,141 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-12-18 06:55:22,159 INFO o.s.o.j.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-12-18 06:55:22,175 WARN o.s.c.LocalVariableTableParameterNameDiscoverer [main] Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.issac.apigw.controller.AuthController
+2022-12-18 06:55:22,186 WARN o.s.c.LocalVariableTableParameterNameDiscoverer [main] Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.issac.apigw.service.ClientIdpInfoService
+2022-12-18 06:55:22,514 WARN o.s.c.LocalVariableTableParameterNameDiscoverer [main] Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.issac.apigw.repo.ClientIdpInfoRepo
+2022-12-18 06:55:22,631 WARN o.s.c.LocalVariableTableParameterNameDiscoverer [main] Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.issac.apigw.service.UserLoginStateService
+2022-12-18 06:55:22,681 WARN o.s.c.LocalVariableTableParameterNameDiscoverer [main] Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.issac.apigw.service.EndpointFactory
+2022-12-18 06:55:22,898 WARN o.s.c.LocalVariableTableParameterNameDiscoverer [main] Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.issac.apigw.controller.LocalAuthController
+2022-12-18 06:55:22,957 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-12-18 06:55:23,373 INFO o.a.j.l.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-9090"]
+2022-12-18 06:55:23,403 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port(s): 9090 (http) with context path ''
+2022-12-18 06:55:23,414 INFO o.s.b.StartupInfoLogger [main] Started ApigwApplication in 7.635 seconds (process running for 8.491)
+2022-12-18 06:55:30,901 INFO o.a.j.l.DirectJDKLog [http-nio-9090-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-12-18 06:55:30,902 INFO o.s.w.s.FrameworkServlet [http-nio-9090-exec-1] Initializing Servlet 'dispatcherServlet'
+2022-12-18 06:55:30,904 INFO o.s.w.s.FrameworkServlet [http-nio-9090-exec-1] Completed initialization in 1 ms
+2022-12-18 06:55:47,235 INFO c.i.a.c.LocalAuthController [http-nio-9090-exec-2] <200 OK OK,eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyMDcwOTZkZS00MjAwLTQ0ZmEtYWFkNy0zZTlhMTBiN2JmYzkiLCJpYXQiOjE2NzEzMjY3NDcsInN1YiI6Imlzc2FjQGdtYWlsLmNvbSIsImlzcyI6IiR7YXBwLmlzc3VlciIsImV4cCI6MTY3MTMyNzM0N30.BOXIb3q3BaJCSjJLXLcGB70zr-ME_cteC8wAG8m6J9A,[X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY", Content-Type:"application/json", Content-Length:"232", Date:"Sun, 18 Dec 2022 01:25:47 GMT", Keep-Alive:"timeout=60", Connection:"keep-alive"]>
+2022-12-18 06:56:08,876 INFO o.s.o.j.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-12-18 06:56:08,878 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2022-12-18 06:56:08,903 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
