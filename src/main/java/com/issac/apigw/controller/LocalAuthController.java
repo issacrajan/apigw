@@ -24,6 +24,7 @@ import com.issac.apigw.service.UserLoginStateService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * @author issac
@@ -42,20 +43,28 @@ public class LocalAuthController {
 	}
 
 	@PostMapping(path = "/auth/authlocal/login", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> login(HttpServletRequest req, @Validated @RequestBody LoginDTO logindTO) {
+	public ResponseEntity<String> login(HttpServletRequest req,
+			HttpServletResponse res,
+			@Validated @RequestBody LoginDTO logindTO) {
+
+		HttpSession session = req.getSession();
+		System.out.println(session);
+
 		RestTemplate rt = new RestTemplate();
 		String endpoint = idpEndpoint.concat("/auth/authlocal/login");
 		HttpEntity<LoginDTO> h = new HttpEntity<>(logindTO);
 		ResponseEntity<String> resp = rt.exchange(endpoint, HttpMethod.POST, h, String.class);
+		String idToken = resp.getBody();
+		addCookie(res, idToken);
 		logger.info(resp.toString());
 		System.out.println(resp);
 		return resp;
 	}
 
 	private void addCookie(HttpServletResponse response, String idToken) {
-		Cookie c1 = new Cookie("jv-portal-id", idToken);
+		Cookie c1 = new Cookie("issac-portal-id", idToken);
 		c1.setHttpOnly(true);
-		c1.setSecure(false);
+		c1.setSecure(false); // TODO
 		c1.setMaxAge(60 * 24);
 		c1.setAttribute("SameSite", "strict");
 		response.addCookie(c1);
